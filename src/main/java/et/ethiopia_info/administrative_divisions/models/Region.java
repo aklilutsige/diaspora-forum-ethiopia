@@ -11,16 +11,16 @@ public class Region {
     // Define fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "regionId")
+    @Column(name = "region_id")
     private int regionId;
 
-    @Column(name = "regionName")
+    @Column(name = "region_name")
     private String regionName;
 
-    @Column(name = "capitalCity")
+    @Column(name = "capital_city")
     private String capitalCity;
 
-    @Column(name = "areaKm2")
+    @Column(name = "area_km2")
     private double areaKm2;
 
     // Define constructors
