@@ -30,14 +30,15 @@ public class Region {
         this.regionName = regionName;
         this.capitalCity = capitalCity;
         this.areaKm2 = areaKm2;
-
     }
 
     // Define getter and setter
+    public int getRegionId() { return regionId;}
+    public void setRegionId(int regionId) {this.regionId = regionId;}
+
     public String getRegionName() {
         return regionName;
     }
-
     public void setRegionName(String regionName) {
         this.regionName = regionName;
     }
@@ -45,7 +46,6 @@ public class Region {
     public String getCapitalCity() {
         return capitalCity;
     }
-
     public void setCapitalCity(String capitalCity) {
         this.capitalCity = capitalCity;
     }
@@ -53,7 +53,6 @@ public class Region {
     public double getAreaKm2() {
         return areaKm2;
     }
-
     public void setAreaKm2(double areaKm2) {
         this.areaKm2 = areaKm2;
     }

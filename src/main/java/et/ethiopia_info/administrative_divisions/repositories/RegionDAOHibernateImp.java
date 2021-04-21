@@ -5,7 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -14,30 +13,49 @@ import java.util.List;
 public class RegionDAOHibernateImp implements IRegionDAO {
 
     //Define field for entity manager for
-
     private EntityManager entityManager;
-
 
     //Set up construction injection
     @Autowired
-    public RegionDAOHibernateImp(EntityManager theEntityManger){
-        entityManager = theEntityManger;
+    public RegionDAOHibernateImp(EntityManager theEntityManger) {
+        this.entityManager = theEntityManger;
     }
 
     @Override
-    @Transactional
     public List<Region> findAll() {
-
         // Get the current hibernate session
         Session currentSession = entityManager.unwrap(Session.class);
-
         // Create a query
-        Query<Region> theQuery = currentSession.createQuery("from Region",Region.class);
+        Query<Region> theQuery =
+                currentSession.createQuery("from Region", Region.class);
 
         // Execute query and get result list
         List<Region> regions = theQuery.getResultList();
 
-        // Return he result
+        // Return the result
         return regions;
+    }
+
+    @Override
+    public Region findById(int regionId) {
+        Session currentSession = this.entityManager.unwrap(Session.class);
+        Region theRegion = currentSession.get(Region.class, regionId);
+        return theRegion;
+    }
+
+    @Override
+    public void save(Region newRegion) {
+        Session currentSession = entityManager.unwrap(Session.class);
+        currentSession.saveOrUpdate(newRegion);
+    }
+
+    @Override
+    public void deleteById(int regionId) {
+        Session currentSession = this.entityManager.unwrap(Session.class);
+        Query theQuery = currentSession.createQuery(
+                "delete from Region where regionId =: regionId ");
+        theQuery.setParameter("regionId", regionId);
+        theQuery.executeUpdate();
+
     }
 }
