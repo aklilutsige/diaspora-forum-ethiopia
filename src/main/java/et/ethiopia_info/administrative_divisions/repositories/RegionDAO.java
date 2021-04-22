@@ -10,14 +10,14 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class RegionDAOHibernateImp implements IRegionDAO {
+public class RegionDAO implements IRegionDAO {
 
     //Define field for entity manager for
     private EntityManager entityManager;
 
     //Set up construction injection
     @Autowired
-    public RegionDAOHibernateImp(EntityManager theEntityManger) {
+    public RegionDAO(EntityManager theEntityManger) {
         this.entityManager = theEntityManger;
     }
 

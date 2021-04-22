@@ -1,8 +1,9 @@
 package et.ethiopia_info.administrative_divisions.services;
 
 import et.ethiopia_info.administrative_divisions.models.Region;
-import et.ethiopia_info.administrative_divisions.repositories.RegionDAOHibernateImp;
+import et.ethiopia_info.administrative_divisions.repositories.RegionDAOJpaImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,10 +12,14 @@ import java.util.List;
 @Service
 public class RegionServiceImpl implements IRegionService {
 
-    private RegionDAOHibernateImp regionDAO;
+    //private RegionDAOHibernateImp regionDAO;
+    private RegionDAOJpaImp regionDAO;
 
     @Autowired
-    public RegionServiceImpl(RegionDAOHibernateImp regionDAO){
+    /*
+    Hibernate implementation
+    public RegionServiceImpl(RegionDAOHibernateImp regionDAO){ this.regionDAO = regionDAO; }*/
+    public RegionServiceImpl(@Qualifier("regionDAOJpaImp") RegionDAOJpaImp regionDAO) {
         this.regionDAO = regionDAO;
     }
 
@@ -34,7 +39,7 @@ public class RegionServiceImpl implements IRegionService {
     @Override
     @Transactional
     public void save(Region newRegion) {
-       regionDAO.save(newRegion);
+        regionDAO.save(newRegion);
     }
 
     @Override
